@@ -1,8 +1,8 @@
 import { logStage, logSuccess, requestData } from "./api.js";
 import { readPersistent, writePersistent } from "./storage.js";
 
-const STORAGE_KEY = "d7460n.app.v1";
-const COOKIE_KEY = "d7460n.app.v1";
+const STORAGE_KEY = "autoapi.io.v1";
+const COOKIE_KEY = "autoapi.io.v1";
 const LOAD_DELAY_MS = 1000;
 let isShellHydrated = false;
 
