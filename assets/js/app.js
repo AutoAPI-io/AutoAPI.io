@@ -3,9 +3,9 @@ import { logSuccess } from "./api.js";
 import { readPersistent, writePersistent } from "./storage.js";
 import { getTourEndpointKey, shouldUseTourEndpoint } from "./tour.js";
 
-const STORAGE_KEY = "d7460n.app.v1";
-const COOKIE_KEY = "d7460n.app.v1";
-const DEFAULT_ENDPOINT_KEY = "app";
+const STORAGE_KEY = "autoapi.io.v1";
+const COOKIE_KEY = "autoapi.io.v1";
+const DEFAULT_ENDPOINT_KEY = "io";
 
 // Detect whether index.html was opened locally via file://.
 function isLocalOpen() {
