@@ -5,7 +5,7 @@ import { getTourEndpointKey, shouldUseTourEndpoint } from "./tour.js";
 
 const STORAGE_KEY = "autoapi.io.v1";
 const COOKIE_KEY = "autoapi.io.v1";
-const DEFAULT_ENDPOINT_KEY = "io";
+const DEFAULT_ENDPOINT_KEY = "app";
 
 // Detect whether index.html was opened locally via file://.
 function isLocalOpen() {
