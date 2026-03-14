@@ -1,5 +1,5 @@
 // Shared API origin; endpoint suffix is the only variable.
-export const API_BASE_URL = "https://6987f917780e8375a6874dcf.mockapi.io";
+export const API_BASE_URL = "https://69b51b6ebe587338e71506e6.mockapi.io";
 
 // Endpoint suffix registry.
 export const ENDPOINT_SUFFIX = {
