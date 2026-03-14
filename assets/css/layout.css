@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap");
+/* ^^^ @import must always be top ^^^ */
+
+/*
+MARK: STARTER SETUP
+
+Features:
+- Platform-agnostic
+- Project-agnostic
+- Framework-agnostic
+- Data-agnostic
+- Minimal reset
+- Minimal nesting
+- Minimal markup
+- Semantic markup
+- Zero-dependencies
+- Zero div
+- Zero span
+- Zero id
+- Zero class
+- Zero data-*
+- Light/dark/system mode
+- Liquid typography
+- Cross-browser formatting consensus
+- Image behavior conformity
+- Transition consistency
+- JS for API/CRUD only
+*/
+
+/* MARK: RESET
+*/
+*,
+* *,
+*:before,
+*:after,
+::after,
+::before {
+  --transition-property: display, height, width, padding, margin, color, border, opacity;
+  --transition-duration: 250ms;
+  --transition-timing-function: ease;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition-behavior: allow-discrete;
+  transition-property: var(--transition-property);
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+/* https://drafts.csswg.org/selectors-4/#typedef-forgiving-selector-list
+- Forgiving selector list
+- Specificity == 0
+- Allows easy override */
+:where(img, picture, video, canvas, svg) {
+  display: block;
+  max-inline-size: 100%;
+}
+
+:where(button, input, select, textarea) {
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: currentColor;
+}
+
+:root {
+  --transition-duration: 250ms;
+  --transition-property: visibility, opacity, display, transform, background,
+    background-color, border-color, color, min-width;
+  --transition-timing-function: ease-in;
+  color-scheme: light dark;
+  font-family: Oxanium, sans-serif;
+  font-size: clamp(1rem, calc(1rem + 0.8cqi), 1.75rem);
+  /* https://html-css-tip-of-the-week.netlify.app/tip/interpolate-size/
+  https://12daysofweb.dev/2024/calc-size-and-interpolate-size/ */
+  interpolate-size: allow-keywords;
+  scroll-behavior: smooth;
+
+  --surface-1: light-dark(oklch(80% 10% 250), oklch(10% 5% 250));
+  --surface-2: light-dark(oklch(90% 7% 250), oklch(20% 5% 250));
+  --surface-3: light-dark(oklch(100% 8% 250), oklch(30% 5% 250));
+  --text-1: light-dark(oklch(10% 5% 250), oklch(90% 5% 250));
+  --text-2: light-dark(oklch(20% 5% 250), oklch(80% 5% 250));
+
+  background: radial-gradient(
+    circle in oklab,
+    var(--surface-2),
+    var(--surface-1)
+  )
+  fixed;
+  color: var(--text-1);
+}
+
+/* DOM order */
+:where(app-container, header, nav, main, article, section, aside, footer) {
+  display: grid;
+  border: solid 1px color-mix(in srgb, currentColor 50%, transparent);
+  border-radius: 0.3rem;
+}
+
+/* MARK: LAYOUT */
+app-container {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  height: 100dvh;
+  grid-template-rows: auto auto 1fr auto;
+  align-items: start;
+  border: none;k
+}
+
+header, footer {
+  justify-content: space-between;
+  grid-auto-flow: column;
+}
+
+main {
+  height: 100%;
+  align-content: start;
+}
+
+article,
+section {
+  border: none;
+  height: 100%;
+}
+
+/* Only content level elements receive padding/margin */
+:where(app-logo, app-user, app-legal, app-version, h1, p) {
+  padding: 1rem;
+  display: none;
+}
+
+app-logo:not(:empty),
+app-user:not(:empty),
+app-legal:not(:empty),
+app-version:not(:empty),
+h1:not(:empty),
+p:not(:empty) {
+  display: block;
+}
+
+/* MARK: TYPOGRAPHY */
+h1 {
+  font-size: 1.3rem;
+}
+p {
+  font-size: 0.9rem;
+  padding-block-start: 0;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+/* MARK: HEURISTICS */
+/* intrinsic sticky headers */
+app-container,
+main,
+article {
+  overflow: hidden;
+}
+
+section {
+  overflow: auto;
+}
+
+/* aside hidden until receives content */
+aside {
+  display: none;
+
+  &:not(:empty) {
+    display: grid;
+  }
+}
+
+/* Intrinsic space trigger */
+nav {
+  grid-auto-flow: column;
+  justify-items: end;
+
+  label {
+    padding-inline: 0.5rem;
+    padding-block: 0.5em;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.6;
+
+    &:has(input:checked) {
+      opacity: 1;
+    }
+  }
+}
+
+/* State machine */
+[aria-hidden="true"] {
+  display: none;
+}
+
+/* MARK: LOADING */
+:root:has(article h1:empty)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 3rem;
+  height: 3rem;
+  margin: auto;
+  border: 0.35rem solid color-mix(in srgb, currentColor 25%, transparent);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  pointer-events: none;
+  opacity: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
